@@ -1,9 +1,11 @@
 from concurrent.futures import ThreadPoolExecutor
 
-from calendar import c
+# Importing os and changing environment BEFORE importing cv2
 import os
 os.environ["OPENCV_IO_ENABLE_OPENEXR"] = "1"
 
+
+# checking if cv2 installed, or install it
 try:
     import cv2
 except:
@@ -11,6 +13,7 @@ except:
     print('opencv not installed, installing it')
     os.system('python -m pip install opencv-python')
     import cv2
+    
     
 print('NC_Hack loaded')
 
@@ -67,4 +70,4 @@ def convert_NC(path):
 
     with ThreadPoolExecutor(max_workers=32) as executor:
         results = list(executor.map(tile, frames.items()))
-        print('done')
+        print('Successfully tiled renders')
